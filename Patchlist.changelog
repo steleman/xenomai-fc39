@@ -1,5 +1,5 @@
-https://gitlab.com/cki-project/kernel-ark/-/commit/cc3349a8625effa6759e5dbbde8a475a93591b9d
- cc3349a8625effa6759e5dbbde8a475a93591b9d Revert "cpupower: Bump soname version"
+https://gitlab.com/cki-project/kernel-ark/-/commit/44a840efd92391371dff551007e7eca2d8c89515
+ 44a840efd92391371dff551007e7eca2d8c89515 Revert "cpupower: Bump soname version"
 
 https://gitlab.com/cki-project/kernel-ark/-/commit/7c261c4b600417524d07c5494a381e58abe404b1
  7c261c4b600417524d07c5494a381e58abe404b1 drm/nouveau/fb: restore init() for ramgp102

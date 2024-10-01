@@ -160,18 +160,18 @@ Summary: The Linux kernel
 #  the --with-release option overrides this setting.)
 %define debugbuildsenabled 1
 %define buildid .xenomai
-%define specrpmversion 6.10.10
-%define specversion 6.10.10
+%define specrpmversion 6.10.11
+%define specversion 6.10.11
 %define patchversion 6.10
 %define pkgrelease 300
 %define kversion 6
-%define tarfile_release 6.10.10
+%define tarfile_release 6.10.11
 # This is needed to do merge window version magic
 %define patchlevel 10
 # This allows pkg_release to have configurable %%{?dist} tag
 %define specrelease 300%{?buildid}%{?dist}
 # This defines the kabi tarball version
-%define kabiversion 6.10.10
+%define kabiversion 6.10.11
 
 # If this variable is set to 1, a bpf selftests build failure will cause a
 # fatal kernel package build error
@@ -308,7 +308,7 @@ Summary: The Linux kernel
 %define with_selftests 1
 %define with_configchecks 1
 # No realtime fedora variants
-%define with_realtime 0
+%define with_realtime 1
 %define with_arm64_64k 0
 %define with_efiuki 1
 %endif
@@ -316,7 +316,7 @@ Summary: The Linux kernel
 %if %{with_verbose}
 %define make_opts V=1
 %else
-%define make_opts -s
+%define make_opts V=1
 %endif
 
 %if %{with toolchain_clang}
@@ -998,8 +998,9 @@ Source4002: gating.yaml
 
 %if !%{nopatches}
 
-Patch1: patch-%{patchversion}-dovetail-evl.patch
-Patch2: patch-%{patchversion}-redhat.patch
+Patch1: patch-%{patchversion}-config-preempt-rt.patch
+Patch2: patch-%{patchversion}-dovetail-evl4.patch
+Patch3: patch-%{patchversion}-redhat.patch
 %endif
 
 # empty final patch to facilitate testing of kernel patches
@@ -1818,7 +1819,8 @@ cp -a %{SOURCE1} .
 %{log_msg "Start of patch applications"}
 %if !%{nopatches}
 
-ApplyOptionalPatch patch-%{patchversion}-dovetail-evl.patch
+ApplyOptionalPatch patch-%{patchversion}-config-preempt-rt.patch
+ApplyOptionalPatch patch-%{patchversion}-dovetail-evl4.patch
 ApplyOptionalPatch patch-%{patchversion}-redhat.patch
 %endif
 
@@ -4052,10 +4054,14 @@ fi\
 #
 #
 %changelog
-* Thu Sep 12 2024 Augusto Caringi <acaringi@redhat.com> [6.10.10-100]
+* Wed Sep 18 2024 Augusto Caringi <acaringi@redhat.com> [6.10.11-100]
 - Turn off libbpf dynamic for perf on F39 (Justin M. Forbes)
 - Revert "cpupower: Bump soname version" (Justin M. Forbes)
 - Drop soname for libcpupower.so since we reverted the bump (Justin M. Forbes)
+
+* Wed Sep 18 2024 Augusto Caringi <acaringi@redhat.com> [6.10.11-0]
+- New config for 6.10.11 (Augusto Caringi)
+- Linux v6.10.11
 
 * Thu Sep 12 2024 Augusto Caringi <acaringi@redhat.com> [6.10.10-0]
 - Add entry for BugsFixed (Justin M. Forbes)

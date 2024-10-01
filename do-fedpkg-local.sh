@@ -1,8 +1,8 @@
 #!/bin/bash
 
 export HERE="`pwd`"
-export REDHAT="${HERE}/kernel-6.10.10/linux-6.10.10-300.fc39.x86_64"
-export KERNEL_RPM="kernel-6.10.10-300.xenomai.fc39.src.rpm"
+export REDHAT="${HERE}/kernel-6.10.11/linux-6.10.11-300.fc39.x86_64"
+export KERNEL_RPM="kernel-6.10.11-300.xenomai.fc39.src.rpm"
 export FLAVOR="fedora"
 export FEDPKG_LOCAL_LOG="${HERE}/fedpkg-local.log"
 

@@ -35,7 +35,7 @@ do
   fi
 done
 
-dnf localinstall \
+dnf reinstall \
   ./kernel-6.10.11-300.xenomai.fc39.x86_64.rpm \
   ./kernel-core-6.10.11-300.xenomai.fc39.x86_64.rpm \
   ./kernel-modules-6.10.11-300.xenomai.fc39.x86_64.rpm \
@@ -58,6 +58,6 @@ dnf localinstall \
   ./rtla-6.10.11-300.xenomai.fc39.x86_64.rpm \
   ./rv-6.10.11-300.xenomai.fc39.x86_64.rpm
 
-rpm -ivh ./kernel-6.10.11-300.xenomai.fc39.src.rpm
+rpm -Uvh ./kernel-6.10.11-300.xenomai.fc39.src.rpm
 echo "Done."
 

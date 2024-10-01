@@ -24,9 +24,6 @@
  drivers/firmware/efi/Makefile                      |   1 +
  drivers/firmware/efi/efi.c                         | 124 ++++++++++++-----
  drivers/firmware/efi/secureboot.c                  |  38 ++++++
- drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h       |   2 +
- drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c  |   2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c  |   1 +
  drivers/hid/hid-rmi.c                              |  66 ---------
  drivers/hwtracing/coresight/coresight-etm4x-core.c |  19 +++
  drivers/input/rmi4/rmi_driver.c                    | 124 ++++++++++-------
@@ -49,7 +46,7 @@
  security/lockdown/lockdown.c                       |   1 +
  security/security.c                                |  12 ++
  tools/power/cpupower/Makefile                      |   2 +-
- 51 files changed, 832 insertions(+), 258 deletions(-)
+ 48 files changed, 828 insertions(+), 257 deletions(-)
 
 diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
 index eec8df1dde06..88f49dd10cd0 100644
@@ -68,7 +65,7 @@ index eec8df1dde06..88f49dd10cd0 100644
    ...
    PPC     KVM_REG_PPC_TM_GPR31            64
 diff --git a/Makefile b/Makefile
-index 9b4614c0fcbb..fb6f23d79a1b 100644
+index 447856c43b32..6beba9617d35 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -22,6 +22,18 @@ $(if $(filter __%, $(MAKECMDGOALS)), \
@@ -1214,44 +1211,6 @@ index 000000000000..de0a3714a5d4
 +		}
 +	}
 +}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
-index 50f0c1914f58..4c3f74396579 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
-@@ -46,6 +46,8 @@ u32 gm107_ram_probe_fbp(const struct nvkm_ram_func *,
- u32 gm200_ram_probe_fbp_amount(const struct nvkm_ram_func *, u32,
- 			       struct nvkm_device *, int, int *);
- 
-+int gp100_ram_init(struct nvkm_ram *);
-+
- /* RAM type-specific MR calculation routines */
- int nvkm_sddr2_calc(struct nvkm_ram *);
- int nvkm_sddr3_calc(struct nvkm_ram *);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
-index 378f6fb70990..8987a21e81d1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
-@@ -27,7 +27,7 @@
- #include <subdev/bios/init.h>
- #include <subdev/bios/rammap.h>
- 
--static int
-+int
- gp100_ram_init(struct nvkm_ram *ram)
- {
- 	struct nvkm_subdev *subdev = &ram->fb->subdev;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
-index 8550f5e47347..b6b6ee59019d 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
-@@ -5,6 +5,7 @@
- 
- static const struct nvkm_ram_func
- gp102_ram = {
-+	.init = gp100_ram_init,
- };
- 
- int
 diff --git a/drivers/hid/hid-rmi.c b/drivers/hid/hid-rmi.c
 index d4af17fdba46..154f0403cbf4 100644
 --- a/drivers/hid/hid-rmi.c
