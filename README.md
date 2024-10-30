@@ -32,3 +32,6 @@ Update 2024/10/01:
 ------------------
     - Upgrade to Kernel 6.10.11.
 
+Update 2024/10/30:
+   - I've been running this kernel since 2024/10/01 with zero problems.
+
