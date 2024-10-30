@@ -28,3 +28,5 @@ Building a Xenomai4-enabled Fedora Kernel is quite simple:
 
 7. I've done some preliminary testing on `x86_64`, but not fully comprehensive testing. This is an ongoing project for me, and I will be doing more testing along the way, which means it's very likely there will be updates.
 
+8. Update 10/30/2024: I've been running this Kernel for over a month now with zero problems.
+
